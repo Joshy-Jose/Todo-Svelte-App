@@ -2,7 +2,7 @@
     import Header from "./components/Header.svelte";
     import Form from "./components/Form.svelte";
     import Todos from "./components/Todos.svelte";
-    import { text } from "svelte/internal";
+
 
     let todos = [
         { id: 1, text: "First", completed: true },
@@ -40,7 +40,6 @@
         }
         
     }
-    console.log(todos);
 
     function onDeleteHandler(event) {
         let delId = event.detail.id;
