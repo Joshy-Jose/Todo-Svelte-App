@@ -1,7 +1,11 @@
-	<!-- Header with information -->
+<script>
+    export let totalTodos;
+    export let remainTodos;
+
+</script>
 	<div class="app-header">
-		<div>10 Total</div>
-		<div class="task-count">1 Remaining</div>
+		<div>{totalTodos} Total</div>
+		<div class="task-count">{remainTodos} Remaining</div>
 	</div>
 
     <style>

@@ -9,6 +9,15 @@
         { id: 3, text: "Third", completed: false },
     ];
 
+    let remainTodos;
+    let totalTodos;
+
+    $:totalTodos = todos.length;
+    $:remainTodos = todos.reduce((n, todos) => {
+        return n + (todos.completed ? 0 : 1)
+
+    },0)                                   //n = count//zero initailly,find completed increment n else 0;
+                                                                       
     function onComplete(event) {
         let updateId = event.detail.id;
         todos.map((todo) => {
@@ -19,7 +28,7 @@
 </script>
 
 <div id="app-container" class="app-container">
-    <Header />
+    <Header {totalTodos} {remainTodos}/>
     <Todos {todos} on:completed={onComplete}/>
     <Form />
 </div>
