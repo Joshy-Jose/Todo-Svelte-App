@@ -1,10 +1,20 @@
 <script>
-    import Todo from "./Todo.svelte";
-</script>
+   import Todo from "./Todo.svelte";
+    export let todos;
+
+
+</script>    
 
 <div class="app-body">
     <ul>
-        <Todo />
+        {#each todos as todo}
+            <Todo
+                itemId={todo.id}
+                itemText={todo.text}
+                completed={todo.completed}
+                on:completed
+            />
+        {/each}
     </ul>
 </div>
 

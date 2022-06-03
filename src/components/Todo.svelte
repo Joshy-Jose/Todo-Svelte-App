@@ -1,10 +1,32 @@
+<script>
+import { createEventDispatcher } from "svelte";
+
+     export let itemText;
+     export let completed; 
+     export let itemId;
+
+     const dispach = createEventDispatcher();
+
+
+     function clickFunction(itemId) {
+         console.log(itemId);
+         dispach("completed",{
+             id:itemId
+         });   
+     }
 
 
 
-<li class="todo-list list-item-view">
+
+</script>
+
+
+<li class="todo-list list-item-view {completed ? 'completed' : ''}">
     <span>
-        <button class="btn btn-done fa-solid fa-square" />
-        <span>First Todo</span>
+        <button 
+         class="btn btn-done fa-solid {completed ? 'fa-square-check' : 'fa-square'}" 
+         on:click="{() => clickFunction(itemId)}"/>
+        <span>{itemText}</span>
     </span>
     <button class="btn btn-delete fa-solid fa-trash" />
 </li>
@@ -33,12 +55,7 @@
             color: #666;
             font-size: 0.7em;
         }
-        .app-body {
-            flex-grow: 1;
-            max-height: 600px;
-            overflow-x: hidden;
-        }
-        
+  
         .todo-list:first-of-type {
             border-top: 1px solid rgb(121, 121, 121);
             padding-top: 10px;
