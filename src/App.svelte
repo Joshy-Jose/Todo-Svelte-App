@@ -2,7 +2,7 @@
     import Header from "./components/Header.svelte";
     import Form from "./components/Form.svelte";
     import Todos from "./components/Todos.svelte";
-import { text } from "svelte/internal";
+    import { text } from "svelte/internal";
 
     let todos = [
         { id: 1, text: "First", completed: true },
@@ -40,11 +40,20 @@ import { text } from "svelte/internal";
         }
         
     }
+    console.log(todos);
+
+    function onDeleteHandler(event) {
+        let delId = event.detail.id;
+
+        todos = todos.filter((todo) => {
+            return todo.id != delId;
+        })
+    }
 </script>
 
 <div id="app-container" class="app-container">
     <Header {totalTodos} {remainTodos}/>
-    <Todos {todos} on:completed={onComplete}/>
+    <Todos {todos} on:completed={onComplete} on:deleted={onDeleteHandler}/>
     <Form on:created={createdTodo} bind:newText/>
 </div>
 

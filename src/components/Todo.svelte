@@ -8,10 +8,17 @@ import { createEventDispatcher } from "svelte";
      const dispach = createEventDispatcher();
 
 
-     function clickFunction(itemId) {
+     function clickComplete(itemId) {
          dispach("completed",{
              id:itemId
          });   
+     }
+
+     function clickDelete(itemId) {
+        dispach("deleted",{
+             id:itemId
+         }); 
+
      }
 
 
@@ -24,10 +31,11 @@ import { createEventDispatcher } from "svelte";
     <span>
         <button 
          class="btn btn-done fa-solid {completed ? 'fa-square-check' : 'fa-square'}" 
-         on:click="{() => clickFunction(itemId)}"/>
+         on:click="{() => clickComplete(itemId)}"/>
         <span>{itemText}</span>
     </span>
-    <button class="btn btn-delete fa-solid fa-trash" />
+    <button class="btn btn-delete fa-solid fa-trash" 
+    on:click="{() => clickDelete(itemId)}"/>
 </li>
 
 <style>
