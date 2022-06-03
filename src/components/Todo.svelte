@@ -9,7 +9,6 @@ import { createEventDispatcher } from "svelte";
 
 
      function clickFunction(itemId) {
-         console.log(itemId);
          dispach("completed",{
              id:itemId
          });   

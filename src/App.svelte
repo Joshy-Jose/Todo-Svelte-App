@@ -2,6 +2,7 @@
     import Header from "./components/Header.svelte";
     import Form from "./components/Form.svelte";
     import Todos from "./components/Todos.svelte";
+import { text } from "svelte/internal";
 
     let todos = [
         { id: 1, text: "First", completed: true },
@@ -11,6 +12,7 @@
 
     let remainTodos;
     let totalTodos;
+    let newText ;
 
     $:totalTodos = todos.length;
     $:remainTodos = todos.reduce((n, todos) => {
@@ -25,12 +27,25 @@
         });
         todos = todos;
     }
+    function createdTodo() {
+        newText = newText.trim();
+        if(newText != "") {
+            let newId = Math.max(...todos.map((e) =>e.id)) + 1;
+            todos = [...todos, {
+                id:newId,
+                text: newText,
+                completed:false
+            }]
+            newText = "";
+        }
+        
+    }
 </script>
 
 <div id="app-container" class="app-container">
     <Header {totalTodos} {remainTodos}/>
     <Todos {todos} on:completed={onComplete}/>
-    <Form />
+    <Form on:created={createdTodo} bind:newText/>
 </div>
 
 <style>
